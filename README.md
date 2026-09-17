@@ -66,6 +66,7 @@ elmo-hikes/
 
 
 ## Contributors
+-Caleb Nacana - BCIT CST Student with some experience in HTML, CSS, JavaScript, and Python. Fun fact: plays softball on weekends when not busy.
 -Kelvin Tse, CST student. Fun fact: does not like approving pull requests at 3AM
 ---
 
