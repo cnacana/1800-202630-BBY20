@@ -67,6 +67,7 @@ elmo-hikes/
 
 ## Contributors
 - **Caleb Nacana** - BCIT CST Student with some experience in HTML, CSS, JavaScript, and Python. Fun fact: plays softball on weekends when not busy.
+- **Kyle Seda** - BCIT CST CST Student from Kenya new to coding but excited and ready to learn.Fun fact: loves going to the gym.
 
 ---
 
