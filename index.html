@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <script type="module" src="sujthksdgjhkjgdfhjk_files/client__XUi"></script>
 
-<head>
     <title>My BCIT Project</title>
     <meta name="comp1800 template" content="My 1800 App">
 
@@ -9,25 +10,53 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Other libraries go here -->
-
+    <!-- Web Components for shared navbar and footer layout -->
+    <script type="module" src="sujthksdgjhkjgdfhjk_files/site-navbar__XUi.js"></script>
+    <script type="module" src="sujthksdgjhkjgdfhjk_files/site-footer__XUi.js"></script>
 </head>
 
-<body>
+<body class="vsc-initialized">
 
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
-    <!------------------------------>
-    <!-- Stuff for body goes here -->
+    <!-- <site-navbar></site-navbar> -->
 
+    <nav>
+        <ul>
+            <li><a href="http://localhost:5173/index.html">Home</a></li>
+            <li><a href="http://localhost:5173/login.html">Login/Signup</a></li>
+            <li><a href="http://localhost:5173/hikes.html">Hikes</a></li>
+        </ul>
+    </nav>
+
+    <!-- This is the welcome on the landing page, with a login/signup button -->
+    <div class="container">
+        <div class=" px-4 py-5 my-5 text-center">
+            <h1 class="display-5 fw-bold">CalanderApp, Orginize, Write, Remember <span id="name-goes-here">install now</span></h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4">Never miss a detail again</p>
+                <h2>Do more in less time.</h2>
+                <div class="d-grid justify-content-sm-center">
+                    <!-- Make this button clickable, using onclick event listener -->
+                    <button onclick="window.location.href='login.html'" type="button" class="btn btn-info btn-lg">Login/Signup</button> <!--comment out?-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <site-footer>
+            <footer class="py-3 my-4 border-top text-center">
+                <p class="mb-0 text-muted">© 2026 BCIT COMP1800</p>
+            </footer>
+        </site-footer>
+
+    <footer>
+        <p>Calander inc 2026</p>
+    </footer>
 
     <!---------------------------------------------->
-    <!-- Your own JavaScript functions go here    -->
+    <!-- Your own JavaScript scripts go here      -->
     <!---------------------------------------------->
+    <script type="module" src="sujthksdgjhkjgdfhjk_files/app__XUi.js"></script>
 
-    <!-- Link to scripts of your own -->
-    <!-- <script type="module" src="./src/main.js"></script> -->
 
-</body>
 
-</html>
+</body></html>
