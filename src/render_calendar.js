@@ -10,11 +10,11 @@ let selected_month = current_month
 let selected_year = current_year
 
 function getDaysInMonth(month) {
-    return new Date(selected_year, selected_month, 0).getDate()
+    return new Date(selected_year, month, 0).getDate()
 }
 
 function firstDayOfWeekOfMonth(month) {
-    return new Date(selected_year, selected_month - 1, 1).getDay()
+    return new Date(selected_year, month - 1, 1).getDay()
 }
 
 const grid = document.getElementById('calendar-grid')
