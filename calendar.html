@@ -1,0 +1,17 @@
+<!Doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <link rel="stylesheet" href="styles/calendar.css">
+</head>
+<body>
+    <h1 id="month-name">Month</h1>
+    <h2 id="year-name">Year</h2>
+    <button id="previous-month" onclick="changeMonth(-1)">Previous Month</button>
+    <button id="next-month" onclick="changeMonth(1)">Next Month</button>
+    <div id="calendar-grid"></div>
+    <script src="src/render_calendar.js"></script>
+</body>
+</html>

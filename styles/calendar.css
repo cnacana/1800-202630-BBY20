@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+html, body {
+    height: 100%;
+}
+
+#calendar-grid {
+    display: grid;
+    width: 80%;
+    height: 80%;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.cell {
+    border: 1px solid blue;
+}
