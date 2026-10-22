@@ -40,12 +40,17 @@ function renderGrid() {
     for (let i = 0; i < total_calendar_cells; i++) {
         const cell = document.createElement('div')
         cell.className = 'cell'
+        cell.id = String(i + 1 - empty_days_in_month)
 
         if (i >= empty_days_in_month) {
             const cell_date = document.createElement('p')
             cell_date.className = 'cell-date'
             cell_date.innerText = String(i + 1 - empty_days_in_month)
             cell.appendChild(cell_date)
+        }
+
+        if (selected_month === current_month && selected_year === current_year && Number(cell.id) === current_date) {
+            cell.classList.add('cell-today')
         }
 
         grid.appendChild(cell)
