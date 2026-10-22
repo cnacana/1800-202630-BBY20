@@ -1,4 +1,3 @@
-
 let date_info = new Date()
 const current_day_of_week = date_info.getDay()
 const current_date = date_info.getDate()
@@ -8,6 +7,10 @@ const current_year = date_info.getFullYear()
 let selected_day_of_week = current_day_of_week
 let selected_month = current_month
 let selected_year = current_year
+
+function getMonthName(month) {
+    return ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][month - 1]
+}
 
 function getDaysInMonth(month) {
     return new Date(selected_year, month, 0).getDate()
@@ -22,7 +25,7 @@ const month_name = document.getElementById('month-name')
 const year_name = document.getElementById('year-name')
 
 function renderGrid() {
-    month_name.innerHTML = String(selected_month)
+    month_name.innerHTML = getMonthName(selected_month)
     year_name.innerHTML = String(selected_year)
 
     grid.replaceChildren()
