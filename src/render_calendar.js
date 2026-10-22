@@ -24,6 +24,16 @@ const grid = document.getElementById('calendar-grid')
 const month_name = document.getElementById('month-name')
 const year_name = document.getElementById('year-name')
 
+function onCellInteraction(event) {
+    if (event.type === 'click') {
+        console.log("click")
+    } else if (event.type === 'mousedown') {
+        console.log("mousedown")
+    } else if (event.type === 'mouseup') {
+        console.log("mouseup")
+    }
+}
+
 function renderGrid() {
     month_name.innerHTML = getMonthName(selected_month)
     year_name.innerHTML = String(selected_year)
@@ -52,6 +62,18 @@ function renderGrid() {
         if (selected_month === current_month && selected_year === current_year && Number(cell.id) === current_date) {
             cell.classList.add('cell-today')
         }
+
+        cell.addEventListener("mousedown", function (event) {
+            onCellInteraction(event)
+        })
+
+        cell.addEventListener("mouseup", function (event) {
+            onCellInteraction(event)
+        })
+
+        cell.addEventListener("click", function (event) {
+            onCellInteraction(event)
+        })
 
         grid.appendChild(cell)
     }
