@@ -1,4 +1,3 @@
-
 let date_info = new Date()
 const current_day_of_week = date_info.getDay()
 const current_date = date_info.getDate()
@@ -8,6 +7,10 @@ const current_year = date_info.getFullYear()
 let selected_day_of_week = current_day_of_week
 let selected_month = current_month
 let selected_year = current_year
+
+function getMonthName(month) {
+    return ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][month - 1]
+}
 
 function getDaysInMonth(month) {
     return new Date(selected_year, month, 0).getDate()
@@ -21,8 +24,18 @@ const grid = document.getElementById('calendar-grid')
 const month_name = document.getElementById('month-name')
 const year_name = document.getElementById('year-name')
 
+function onCellInteraction(event) {
+    if (event.type === 'click') {
+        console.log("click")
+    } else if (event.type === 'mousedown') {
+        console.log("mousedown")
+    } else if (event.type === 'mouseup') {
+        console.log("mouseup")
+    }
+}
+
 function renderGrid() {
-    month_name.innerHTML = String(selected_month)
+    month_name.innerHTML = getMonthName(selected_month)
     year_name.innerHTML = String(selected_year)
 
     grid.replaceChildren()
@@ -37,6 +50,7 @@ function renderGrid() {
     for (let i = 0; i < total_calendar_cells; i++) {
         const cell = document.createElement('div')
         cell.className = 'cell'
+        cell.id = String(i + 1 - empty_days_in_month)
 
         if (i >= empty_days_in_month) {
             const cell_date = document.createElement('p')
@@ -44,6 +58,22 @@ function renderGrid() {
             cell_date.innerText = String(i + 1 - empty_days_in_month)
             cell.appendChild(cell_date)
         }
+
+        if (selected_month === current_month && selected_year === current_year && Number(cell.id) === current_date) {
+            cell.classList.add('cell-today')
+        }
+
+        cell.addEventListener("mousedown", function (event) {
+            onCellInteraction(event)
+        })
+
+        cell.addEventListener("mouseup", function (event) {
+            onCellInteraction(event)
+        })
+
+        cell.addEventListener("click", function (event) {
+            onCellInteraction(event)
+        })
 
         grid.appendChild(cell)
     }

@@ -21,3 +21,7 @@ html, body {
 .cell {
     border: 1px solid blue;
 }
+
+.cell-today {
+    background-color: yellow;
+}
