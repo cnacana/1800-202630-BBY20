@@ -52,8 +52,11 @@ function renderGrid(selected_highlighted_day) {
 
     for (let i = 0; i < total_calendar_cells; i++) {
         const cell = document.createElement('div')
+        let first_day_of_year = new Date(selected_year, 0, 1)
+        let current_day_of_year = new Date(selected_year, selected_month - 1, (i + 1 - empty_days_in_month))
         cell.className = 'cell'
-        cell.id = String(i + 1 - empty_days_in_month)
+        cell.id = String((current_day_of_year - first_day_of_year) / (1000 * 3600 * 24) + 1) // First day of 0 is 1 and not 0
+        // cell.id = String(i + 1 - empty_days_in_month)
 
         if (i >= empty_days_in_month) {
             const cell_date = document.createElement('p')
@@ -64,7 +67,7 @@ function renderGrid(selected_highlighted_day) {
 
         if (selected_month === current_month && selected_year === current_year && Number(cell.id) === current_date) {
             cell.classList.add('cell-today')
-        } else {
+        } else if (selected_day === (i + 1)) {
             cell.classList.add('cell-selected')
         }
 
@@ -87,6 +90,12 @@ function renderGrid(selected_highlighted_day) {
 function changeMonth(increment) {
     selected_month += increment
 
+    if (selected_month === current_month) {
+        selected_day = current_date
+    } else {
+        selected_day = 0
+    }
+
     if (selected_month > 12) {
         selected_year += 1
         selected_month -= 12
@@ -102,11 +111,11 @@ function changeDay(increment) {
     selected_day += increment
 
     if (selected_day > getDaysInMonth(selected_month)) {
-        selected_month += 1
-        selected_day = 1
+        console.log("Add one day")
     } else if (selected_day < getDaysInMonth(selected_month)) {
-        selected_month -= 1
-        selected_day = getDaysInMonth(selected_month)
+        console.log("Minus one day")
+        // selected_month -= 1
+        // selected_day = getDaysInMonth(selected_month)
     }
 
     renderGrid(selected_day)
