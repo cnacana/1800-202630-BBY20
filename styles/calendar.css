@@ -25,3 +25,7 @@ html, body {
 .cell-today {
     background-color: yellow;
 }
+
+.cell-selected {
+    background-color: lightblue;
+}
