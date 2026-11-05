@@ -53,6 +53,12 @@ html, body {
     color: #dee2e6 !important;
 }
 
+.cell-today {
+    background-color: yellow;
+}
+
+.cell-selected {
+    background-color: lightblue;
 .has-entry-dot {
     position: absolute;
     bottom: 12%;

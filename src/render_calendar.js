@@ -5,11 +5,12 @@ const current_month = date_info.getMonth() + 1
 const current_year = date_info.getFullYear()
 
 let selected_day_of_week = current_day_of_week
+let selected_day = current_date
 let selected_month = current_month
 let selected_year = current_year
 
 function getMonthName(month) {
-    return ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][month - 1]
+    return ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"][month - 1]
 }
 
 function getDaysInMonth(month) {
@@ -23,6 +24,7 @@ function firstDayOfWeekOfMonth(month) {
 const grid = document.getElementById('calendar-grid')
 const month_name = document.getElementById('month-name')
 const year_name = document.getElementById('year-name')
+const day_name = document.getElementById('day-name')
 
 function onCellInteraction(event) {
     if (event.type === 'click') {
@@ -34,9 +36,10 @@ function onCellInteraction(event) {
     }
 }
 
-function renderGrid() {
+function renderGrid(selected_highlighted_day) {
     month_name.innerHTML = getMonthName(selected_month)
     year_name.innerHTML = String(selected_year)
+    day_name.innerHTML = String(selected_day_of_week)
 
     grid.replaceChildren()
 
@@ -61,6 +64,8 @@ function renderGrid() {
 
         if (selected_month === current_month && selected_year === current_year && Number(cell.id) === current_date) {
             cell.classList.add('cell-today')
+        } else {
+            cell.classList.add('cell-selected')
         }
 
         cell.addEventListener("mousedown", function (event) {
@@ -91,6 +96,20 @@ function changeMonth(increment) {
     }
 
     renderGrid()
+}
+
+function changeDay(increment) {
+    selected_day += increment
+
+    if (selected_day > getDaysInMonth(selected_month)) {
+        selected_month += 1
+        selected_day = 1
+    } else if (selected_day < getDaysInMonth(selected_month)) {
+        selected_month -= 1
+        selected_day = getDaysInMonth(selected_month)
+    }
+
+    renderGrid(selected_day)
 }
 
 renderGrid()
