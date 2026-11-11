@@ -13,17 +13,23 @@
         <i class="bi bi-chevron-left fs-5"></i>
     </button>
     <h1 id="year-name">Year</h1>
+    <button class="btn btn-link link-secondary p-0 text-center" onclick="changeMonth(-1)">
+        <i class="bi bi-chevron-left fs-5"></i>
+    </button>
     <div class="d-flex align-items-center justify-content-center w-50">
-        <button class="btn btn-link link-secondary p-0 text-center" onclick="changeMonth(-1)">
+        <button class="btn btn-link link-secondary p-0 text-center" onclick="changeDay(-1)">
             <i class="bi bi-chevron-left fs-5"></i>
         </button>
         <div class="text-center">
             <h2><span id="month-name">Month</span> <span id="day-name">Day</span></h2>
         </div>
-        <button class="btn btn-link link-secondary p-0 text-center" onclick="changeMonth(1)">
+        <button class="btn btn-link link-secondary p-0 text-center" onclick="changeDay(1)">
             <i class="bi bi-chevron-right fs-5"></i>
         </button>
     </div>
+    <button class="btn btn-link link-secondary p-0 text-center" onclick="changeMonth(1)">
+        <i class="bi bi-chevron-right fs-5"></i>
+    </button>
     <div class="card shadow-sm w-100 mx-3">
         <div id="calendar-grid"></div>
     </div>

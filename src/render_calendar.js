@@ -26,9 +26,12 @@ const month_name = document.getElementById('month-name')
 const year_name = document.getElementById('year-name')
 const day_name = document.getElementById('day-name')
 
-function onCellInteraction(event) {
+function onCellInteraction(event, id) {
     if (event.type === 'click') {
         console.log("click")
+        let selected_cell = document.getElementById(id)
+        selected_day = Number(selected_cell.querySelector(".cell-date").innerHTML) + firstDayOfWeekOfMonth(selected_month)
+        renderGrid(selected_day)
     } else if (event.type === 'mousedown') {
         console.log("mousedown")
     } else if (event.type === 'mouseup') {
@@ -37,16 +40,16 @@ function onCellInteraction(event) {
 }
 
 function renderGrid(selected_highlighted_day) {
-    month_name.innerHTML = getMonthName(selected_month)
-    year_name.innerHTML = String(selected_year)
-    day_name.innerHTML = String(selected_day_of_week)
-
-    grid.replaceChildren()
-
     let days_in_month = getDaysInMonth(selected_month)
     let empty_days_in_month = firstDayOfWeekOfMonth(selected_month)
     let total_calendar_cells = days_in_month + empty_days_in_month
     let total_calendar_rows = Math.ceil(total_calendar_cells / 7)
+
+    month_name.innerHTML = getMonthName(selected_month)
+    year_name.innerHTML = String(selected_year)
+    day_name.innerHTML = String(selected_day - empty_days_in_month)
+
+    grid.replaceChildren()
 
     grid.style.gridTemplateRows = `repeat(${total_calendar_rows}, 1fr)`
 
@@ -55,8 +58,7 @@ function renderGrid(selected_highlighted_day) {
         let first_day_of_year = new Date(selected_year, 0, 1)
         let current_day_of_year = new Date(selected_year, selected_month - 1, (i + 1 - empty_days_in_month))
         cell.className = 'cell'
-        cell.id = String((current_day_of_year - first_day_of_year) / (1000 * 3600 * 24) + 1) // First day of 0 is 1 and not 0
-        // cell.id = String(i + 1 - empty_days_in_month)
+        cell.id = String(Math.round((current_day_of_year - first_day_of_year) / (1000 * 3600 * 24) + 1)) // First day of 0 is 1 and not 0
 
         if (i >= empty_days_in_month) {
             const cell_date = document.createElement('p')
@@ -65,22 +67,22 @@ function renderGrid(selected_highlighted_day) {
             cell.appendChild(cell_date)
         }
 
-        if (selected_month === current_month && selected_year === current_year && Number(cell.id) === current_date) {
+        if (selected_month === current_month && selected_year === current_year && (i + 1 - empty_days_in_month) === current_date) {
             cell.classList.add('cell-today')
         } else if (selected_day === (i + 1)) {
             cell.classList.add('cell-selected')
         }
 
         cell.addEventListener("mousedown", function (event) {
-            onCellInteraction(event)
+            onCellInteraction(event, cell.id)
         })
 
         cell.addEventListener("mouseup", function (event) {
-            onCellInteraction(event)
+            onCellInteraction(event, cell.id)
         })
 
         cell.addEventListener("click", function (event) {
-            onCellInteraction(event)
+            onCellInteraction(event, cell.id)
         })
 
         grid.appendChild(cell)
@@ -93,7 +95,7 @@ function changeMonth(increment) {
     if (selected_month === current_month) {
         selected_day = current_date
     } else {
-        selected_day = 0
+        selected_day = firstDayOfWeekOfMonth(selected_month) + 1
     }
 
     if (selected_month > 12) {
@@ -109,13 +111,28 @@ function changeMonth(increment) {
 
 function changeDay(increment) {
     selected_day += increment
+    console.log(selected_day) // Date go-to
+    console.log(getDaysInMonth(selected_month)) // Total days in a month
+    console.log(selected_year) // the year in selection
 
-    if (selected_day > getDaysInMonth(selected_month)) {
-        console.log("Add one day")
-    } else if (selected_day < getDaysInMonth(selected_month)) {
-        console.log("Minus one day")
-        // selected_month -= 1
-        // selected_day = getDaysInMonth(selected_month)
+    if (selected_day > getDaysInMonth(selected_month) + firstDayOfWeekOfMonth(selected_month)) { // if day goes higher than it can,
+        console.log("Add one month")
+        selected_month += 1 // go to next month
+        selected_day = firstDayOfWeekOfMonth(selected_month) + 1 // day starts at first day selected month
+    } else if (selected_day < firstDayOfWeekOfMonth(selected_month) + 1) {
+        console.log("Minus one month")
+        selected_month -= 1
+        selected_day = getDaysInMonth(selected_month) + firstDayOfWeekOfMonth(selected_month)
+    }
+
+    if (selected_month > 12) {
+        selected_year += 1
+        selected_month = 1
+        selected_day = firstDayOfWeekOfMonth(selected_month) + 1
+    } else if (selected_month < 1) {
+        selected_year -= 1
+        selected_month = 12
+        selected_day = getDaysInMonth(selected_month) + firstDayOfWeekOfMonth(selected_month)
     }
 
     renderGrid(selected_day)
