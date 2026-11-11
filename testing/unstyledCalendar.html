@@ -1,0 +1,47 @@
+<!Doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/calendar.css">
+</head>
+<body>
+<button class="btn btn-link link-secondary p-0 text-center" onclick="window.location.href='login.html'">
+    <i class="bi bi-chevron-left fs-5"></i>
+</button>
+<h1 id="year-name">Year</h1>
+<div>
+    <button class="btn btn-link link-secondary p-0 text-center" onclick="changeMonth(-1)">
+        <i class="bi bi-chevron-left fs-5"></i>
+    </button>
+    <div id="calendar-grid"></div>
+    <button class="btn btn-link link-secondary p-0 text-center" onclick="changeMonth(1)">
+        <i class="bi bi-chevron-right fs-5"></i>
+    </button>
+</div>
+<div>
+    <main>
+        <div>
+            <label for="day-entry"></label>
+            <textarea id="day-entry" placeholder="Type here..."></textarea>
+        </div>
+    </main>
+</div>
+<div>
+    <button class="btn btn-link link-secondary p-0 text-center" onclick="changeDay(-1)">
+        <i class="bi bi-chevron-left fs-5"></i>
+    </button>
+    <div>
+        <h2><span id="month-name">Month</span> <span id="day-name">Day</span></h2>
+    </div>
+    <button class="btn btn-link link-secondary p-0 text-center" onclick="changeDay(1)">
+        <i class="bi bi-chevron-right fs-5"></i>
+    </button>
+</div>
+<script src="../src/render_calendar.js"></script>
+</body>
+<script type="module" src="../src/components/site-footer.js"></script>
+</html>
