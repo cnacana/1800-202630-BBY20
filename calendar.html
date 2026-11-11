@@ -31,9 +31,13 @@
             <label for="journal-entry">Notes</label>
             <textarea class="form-control border-0 h-100 w-100 p-0 shadow-none text-secondary" id="journal-entry" placeholder="Type here..." style="resize: none; font-size: 0.95rem; line-height: 1.6;"></textarea>
         </div>
+        <button class="btn btn-primary mt-3 align-self-end" id="save-journal-entry" type="button">Save</button>
+        <p id="journal-save-status" class="mt-2 mb-0" role="status" aria-live="polite"></p>
     </main>
 </div>
 <script src="src/render_calendar.js"></script>
+<script type="module" src="/src/calanderdata.js"></script>
 </body>
 <script type="module" src="/src/components/site-footer.js"></script>
 </html>
+

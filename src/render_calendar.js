@@ -26,7 +26,15 @@ const year_name = document.getElementById('year-name')
 
 function onCellInteraction(event) {
     if (event.type === 'click') {
-        console.log("click")
+        const day = Number(event.currentTarget.id)
+        if (!Number.isInteger(day) || day < 1 || day > getDaysInMonth(selected_month)) {
+            return
+        }
+
+        const selectedDate = `${selected_year}-${String(selected_month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+        document.dispatchEvent(new CustomEvent('calendar-day-selected', {
+            detail: { date: selectedDate }
+        }))
     } else if (event.type === 'mousedown') {
         console.log("mousedown")
     } else if (event.type === 'mouseup') {
