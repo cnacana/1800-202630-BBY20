@@ -22,14 +22,14 @@ html, body {
     border: 1px solid blue;
 }
 
+.cell-has-data {
+    background-color: orange;
+}
+
 .cell-today {
     background-color: yellow;
 }
 
 .cell-selected {
     background-color: lightblue;
-}
-
-.cell-has-data {
-    background-color: orange;
 }

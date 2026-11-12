@@ -41,6 +41,11 @@ function onCellInteraction(event, id) {
     if (event.type === 'click') {
         console.log("click")
         let selected_cell = document.getElementById(id)
+
+        // Immediately update the selected cell's highlight
+        selected_cell.classList.remove("selected-cell");
+        selected_cell.classList.add("selected-cell");
+
         selected_day = Number(selected_cell.querySelector(".cell-date").innerHTML) + firstDayOfWeekOfMonth(selected_month)
 
         let selectedDate = `${selected_year}-${String(selected_month).padStart(2, '0')}-${String(selected_day).padStart(2, '0')}`
