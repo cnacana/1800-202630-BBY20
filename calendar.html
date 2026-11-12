@@ -9,13 +9,23 @@
     <link rel="stylesheet" href="styles/calendar.css">
 </head>
 <body class="bg-light d-flex flex-column align-items-center justify-content-center min-vh-100 m-0">
-<h1 id="year-name">Year</h1>
-<div class="d-flex align-items-center justify-content-center w-50">
+    <button class="btn btn-link link-secondary p-0 text-center" onclick="window.location.href='index.html'">
+        <i class="bi bi-chevron-left fs-5"></i>
+    </button>
+    <h1 id="year-name">Year</h1>
     <button class="btn btn-link link-secondary p-0 text-center" onclick="changeMonth(-1)">
         <i class="bi bi-chevron-left fs-5"></i>
     </button>
-    <div class="text-center">
-        <h2 id="month-name" class="mb-0">Month</h2>
+    <div class="d-flex align-items-center justify-content-center w-50">
+        <button class="btn btn-link link-secondary p-0 text-center" onclick="changeDay(-1)">
+            <i class="bi bi-chevron-left fs-5"></i>
+        </button>
+        <div class="text-center">
+            <h2><span id="month-name">Month</span> <span id="day-name">Day</span></h2>
+        </div>
+        <button class="btn btn-link link-secondary p-0 text-center" onclick="changeDay(1)">
+            <i class="bi bi-chevron-right fs-5"></i>
+        </button>
     </div>
     <button class="btn btn-link link-secondary p-0 text-center" onclick="changeMonth(1)">
         <i class="bi bi-chevron-right fs-5"></i>
@@ -31,8 +41,13 @@
             <label for="journal-entry">Notes</label>
             <textarea class="form-control border-0 h-100 w-100 p-0 shadow-none text-secondary" id="journal-entry" placeholder="Type here..." style="resize: none; font-size: 0.95rem; line-height: 1.6;"></textarea>
         </div>
+        <button class="btn btn-primary mt-3 align-self-end" id="save-journal-entry" type="button">Save</button>
+        <p id="journal-save-status" class="mt-2 mb-0" role="status" aria-live="polite"></p>
     </main>
 </div>
 <script src="src/render_calendar.js"></script>
+<script type="module" src="/src/calanderdata.js"></script>
 </body>
+<script type="module" src="/src/components/site-footer.js"></script>
 </html>
+
