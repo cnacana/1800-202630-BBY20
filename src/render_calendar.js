@@ -1,3 +1,5 @@
+import { readJournalEntry } from "./calanderdata.js";
+
 let date_info = new Date()
 const current_day_of_week = date_info.getDay()
 const current_date = date_info.getDate()
@@ -33,6 +35,7 @@ function onCellInteraction(event, id) {
         selected_day = Number(selected_cell.querySelector(".cell-date").innerHTML) + firstDayOfWeekOfMonth(selected_month)
 
         let selectedDate = `${selected_year}-${String(selected_month).padStart(2, '0')}-${String(selected_day).padStart(2, '0')}`
+
         document.dispatchEvent(new CustomEvent('calendar-day-selected', {
             detail: { date: selectedDate }
         }))
@@ -79,6 +82,8 @@ function renderGrid(selected_highlighted_day) {
             cell.classList.add('cell-today')
         } else if (selected_day === (i + 1)) {
             cell.classList.add('cell-selected')
+        } else if (readJournalEntry(selected_day)) {
+            cell.classList.add('cell-has-data')
         }
 
         cell.addEventListener("mousedown", function (event) {
