@@ -1,4 +1,11 @@
-import { readJournalEntry } from "./calanderdata.js";
+import { getEntryDocument } from "./calanderdata.js";
+import { auth, db } from "./firebaseConfig.js";
+import {
+  doc,
+  getDoc,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
 
 let date_info = new Date()
 const current_day_of_week = date_info.getDay()
@@ -50,7 +57,7 @@ function onCellInteraction(event, id) {
     }
 }
 
-function renderGrid(selected_highlighted_day) {
+async function renderGrid(selected_highlighted_day) {
     let days_in_month = getDaysInMonth(selected_month)
     let empty_days_in_month = firstDayOfWeekOfMonth(selected_month)
     let total_calendar_cells = days_in_month + empty_days_in_month
@@ -78,11 +85,16 @@ function renderGrid(selected_highlighted_day) {
             cell.appendChild(cell_date)
         }
 
+        // let cell_has_data = getEntryDocument(getUser(), selected_day)
+        const snapshot = await getDoc(getEntryDocument(auth.currentUser, selected_day));
+        cell_has_data = snapshot.exists() ? snapshot.data().text : "";
+        console.log(cell_has_data)
+
         if (selected_month === current_month && selected_year === current_year && (i + 1 - empty_days_in_month) === current_date) {
             cell.classList.add('cell-today')
         } else if (selected_day === (i + 1)) {
             cell.classList.add('cell-selected')
-        } else if (readJournalEntry(selected_day)) {
+        } else if (cell_has_data.converter !== null) {
             cell.classList.add('cell-has-data')
         }
 

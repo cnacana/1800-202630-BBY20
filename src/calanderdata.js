@@ -6,12 +6,17 @@ import {
   setDoc,
 } from "firebase/firestore";
 
-function getEntryDocument(userId, day) {
+// export async function getUser() {
+//   return auth.currentUser
+// }
+
+export function getEntryDocument(userId, day) {
   return doc(db, "Userdata", "Journalentries", "entries", `${userId}_${day}`);
 }
 
-export async function readJournalEntry(day) {
-  const user = auth.currentUser;
+export async function readJournalEntry(day, setUser=auth.currentUser) {
+  const user = auth.currentUser
+  
   if (!user) {
     throw new Error("Please sign in before viewing journal entries.");
   }

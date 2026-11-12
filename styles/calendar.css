@@ -29,3 +29,7 @@ html, body {
 .cell-selected {
     background-color: lightblue;
 }
+
+.cell-has-data {
+    background-color: orange;
+}
