@@ -6,15 +6,22 @@ import {
   setDoc,
 } from "firebase/firestore";
 
-// export async function getUser() {
-//   return auth.currentUser
-// }
+import { onAuthStateChanged } from "firebase/auth";
+
+export function getUser() {
+    return new Promise((resolve) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            unsubscribe();
+            resolve(user);
+        });
+    });
+}
 
 export function getEntryDocument(userId, day) {
   return doc(db, "Userdata", "Journalentries", "entries", `${userId}_${day}`);
 }
 
-export async function readJournalEntry(day, setUser=auth.currentUser) {
+export async function readJournalEntry(day) {
   const user = auth.currentUser
   
   if (!user) {
