@@ -130,7 +130,7 @@ async function renderGrid(selected_highlighted_day, user) {
         // cell_has_data = snapshot.exists() ? snapshot.data().text : "";
         // console.log(cell_has_data)
 
-        const day = i + 1 - empty_days_in_month;
+        const day = i + 1;
 
         if (datesWithData.has(day)) {
             cell.classList.add('cell-has-data');
@@ -227,3 +227,6 @@ async function initializeCalendar() {
 }
 
 initializeCalendar();
+
+window.changeMonth = changeMonth;
+window.changeDay = changeDay;
