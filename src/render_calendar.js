@@ -28,23 +28,22 @@ const day_name = document.getElementById('day-name')
 
 function onCellInteraction(event, id) {
     if (event.type === 'click') {
-        const day = Number(event.currentTarget.id)
-        if (!Number.isInteger(day) || day < 1 || day > getDaysInMonth(selected_month)) {
-            return
-        }
-
-        const selectedDate = `${selected_year}-${String(selected_month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
-        document.dispatchEvent(new CustomEvent('calendar-day-selected', {
-            detail: { date: selectedDate }
-        }))
         console.log("click")
         let selected_cell = document.getElementById(id)
         selected_day = Number(selected_cell.querySelector(".cell-date").innerHTML) + firstDayOfWeekOfMonth(selected_month)
+
+        let selectedDate = `${selected_year}-${String(selected_month).padStart(2, '0')}-${String(selected_day).padStart(2, '0')}`
+        document.dispatchEvent(new CustomEvent('calendar-day-selected', {
+            detail: { date: selectedDate }
+        }))
+
         renderGrid(selected_day)
     } else if (event.type === 'mousedown') {
         console.log("mousedown")
     } else if (event.type === 'mouseup') {
         console.log("mouseup")
+    } else if (event.type === 'mouseover') {
+        console.log("mouseover")
     }
 }
 
@@ -93,6 +92,10 @@ function renderGrid(selected_highlighted_day) {
         cell.addEventListener("click", function (event) {
             onCellInteraction(event, cell.id)
         })
+
+        cell.addEventListener('mouseover', function (event) {
+            onCellInteraction(event, cell.id)
+        });
 
         grid.appendChild(cell)
     }
