@@ -1,10 +1,8 @@
-# Elmo Hikes
+# Backtrack
 
 
 ## Overview
-Elmo Hikes is a client-side JavaScript web application that helps users discover and explore hiking trails. The app displays a curated list of hike trails, each with details such as name, location, difficulty, and an image. Users can browse the list and mark their favorite trails for easy access later.
-
-Developed for the COMP 1800 course, this project applies User-Centred Design practices and agile project management, and demonstrates integration with Firebase backend services for storing user favorites.
+Backtrack is a Calander app built around the theme of "Older and Wiser" for the Projects1800 class at BCIT
 
 ---
 
