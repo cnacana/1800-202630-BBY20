@@ -23,7 +23,7 @@ html, body {
 }
 
 .cell-has-data {
-    background-color: orange;
+    background-color: orangered;
 }
 
 .cell-today {
@@ -32,4 +32,20 @@ html, body {
 
 .cell-selected {
     background-color: lightblue;
+}
+
+.cell-selected.cell-today {
+    background-color: lightgreen;
+}
+
+.cell-has-data.cell-today {
+    background-color: orange;
+}
+
+.cell-selected.cell-has-data {
+    background-color: violet;
+}
+
+.cell-selected.cell-today.cell-has-data {
+    background-color: purple;
 }

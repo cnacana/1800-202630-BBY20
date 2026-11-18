@@ -143,7 +143,9 @@ async function renderGrid(selected_highlighted_day, user) {
 
         if (selected_month === current_month && selected_year === current_year && (i + 1 - empty_days_in_month) === current_date) {
             cell.classList.add('cell-today')
-        } else if (selected_day === (i + 1)) {
+        }
+
+        if (selected_day === (i + 1)) {
             cell.classList.add('cell-selected')
         } // else if (cell_has_data.converter !== null) {
             // cell.classList.add('cell-has-data')
