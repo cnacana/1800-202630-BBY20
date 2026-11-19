@@ -9,42 +9,47 @@
     <link rel="stylesheet" href="styles/calendar.css">
 </head>
 <body class="bg-light d-flex flex-column align-items-center justify-content-center min-vh-100 m-0">
-    <button class="btn btn-link link-secondary p-0 text-center" onclick="window.location.href='index.html'">
-        <i class="bi bi-chevron-left fs-5"></i>
-    </button>
-    <h1 id="year-name">Year</h1>
-    <button class="btn btn-link link-secondary p-0 text-center" onclick="changeMonth(-1)">
-        <i class="bi bi-chevron-left fs-5"></i>
-    </button>
-    <div class="d-flex align-items-center justify-content-center w-50">
-        <button class="btn btn-link link-secondary p-0 text-center" onclick="changeDay(-1)">
+    <main class="app-shell">
+        <!--
+        <button class="btn btn-link link-secondary p-0 text-center" onclick="window.location.href='index.html'">
             <i class="bi bi-chevron-left fs-5"></i>
         </button>
-        <div class="text-center">
-            <h2><span id="month-name">Month</span> <span id="day-name">Day</span></h2>
-        </div>
-        <button class="btn btn-link link-secondary p-0 text-center" onclick="changeDay(1)">
-            <i class="bi bi-chevron-right fs-5"></i>
-        </button>
-    </div>
-    <button class="btn btn-link link-secondary p-0 text-center" onclick="changeMonth(1)">
-        <i class="bi bi-chevron-right fs-5"></i>
-    </button>
-</div>
-<div class="card shadow-sm w-100 mx-3">
-    <div id="calendar-grid"></div>
-</div>
-<div class="card shadow-sm w-100 mx-3">
-    <header class="card-header bg-white d-flex justify-content-between align-items-center py-3 border-bottom-0"></header>
-    <main class="card-body p-3 pt-0 d-flex flex-column">
-        <div class="flex-grow-1 border rounded bg-white p-3">
-            <label for="journal-entry">Notes</label>
-            <textarea class="form-control border-0 h-100 w-100 p-0 shadow-none text-secondary" id="journal-entry" placeholder="Type here..." style="resize: none; font-size: 0.95rem; line-height: 1.6;"></textarea>
-        </div>
-        <button class="btn btn-primary mt-3 align-self-end" id="save-journal-entry" type="button">Save</button>
-        <p id="journal-save-status" class="mt-2 mb-0" role="status" aria-live="polite"></p>
+        -->
+        <header class="year-bar">
+            <button class="nav-arrow prev" onclick="changeYear(-1)">
+                <i class="bi bi-chevron-left fs-5"></i>
+            </button>
+            <h1 id="year-name" class="year-label">Year</h1>
+            <button class="nav-arrow " onclick="changeYear(1)">
+                <i class="bi bi-chevron-right fs-5"></i>
+            </button>
+        </header>
+        <section class="calendar-stage">
+            <div class="month-row">
+                <button class="side-arrow prev" onclick="changeMonth(-1)">
+                    <i class="bi bi-chevron-left fs-5"></i>
+                </button>
+                <div class="month-card">
+                    <div class="month-title">
+                        <h2><span id="month-name">Month</span></h2>
+                    </div>
+                    <div class="weekday-grid" aria-hidden="true"><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span></div>
+                    <div id="calendar-grid" class="dates-grid"></div>
+                </div>
+                <button class="side-arrow" onclick="changeMonth(1)">
+                    <i class="bi bi-chevron-right fs-5"></i>
+                </button>
+            </div>
+            <section class="event-area">
+                <div class="event-form">
+                    <textarea class="event-input" id="journal-entry" placeholder="Type here..." style=""></textarea>
+                    <p id="journal-save-status" class="mt-2 mb-0" role="status" aria-live="polite"></p>
+                    <button class="save-button" id="save-journal-entry" type="button">Save</button>
+                </div>
+                <div class="event-list" id="eventList" aria-live="polite"></div>
+            </section>
+        </section>
     </main>
-</div>
 <script type="module" src="src/render_calendar.js"></script>
 <script type="module" src="/src/calanderdata.js"></script>
 </body>

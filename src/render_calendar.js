@@ -21,7 +21,7 @@ let selected_month = current_month
 let selected_year = current_year
 
 function getMonthName(month) {
-    return ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"][month - 1]
+    return ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][month - 1]
 }
 
 function getDaysInMonth(month) {
@@ -78,7 +78,7 @@ async function renderGrid(selected_highlighted_day, user) {
 
     month_name.innerHTML = getMonthName(selected_month)
     year_name.innerHTML = String(selected_year)
-    day_name.innerHTML = String(selected_day - empty_days_in_month)
+    // day_name.innerHTML = String(selected_day - empty_days_in_month)
 
     grid.style.gridTemplateRows = `repeat(${total_calendar_rows}, 1fr)`
 
@@ -145,7 +145,7 @@ async function renderGrid(selected_highlighted_day, user) {
             cell.classList.add('cell-today')
         }
 
-        if (selected_day === (i + 1)) {
+        if (selected_day === (i + 1) && selected_highlighted_day !== undefined) {
             cell.classList.add('cell-selected')
         } // else if (cell_has_data.converter !== null) {
             // cell.classList.add('cell-has-data')
@@ -191,6 +191,13 @@ function changeMonth(increment) {
     renderGrid(undefined, currentUser)
 }
 
+function changeYear(increment) {
+    selected_year += increment
+
+    renderGrid(undefined, currentUser)
+}
+
+/*
 function changeDay(increment) {
     selected_day += increment
     console.log(selected_day) // Date go-to
@@ -219,6 +226,7 @@ function changeDay(increment) {
 
     renderGrid(selected_day, currentUser)
 }
+ */
 
 async function initializeCalendar() {
     currentUser = await getUser();
@@ -230,10 +238,10 @@ async function initializeCalendar() {
 
     console.log("Signed in as:", currentUser.uid);
 
-    renderGrid(selected_day, currentUser);
+    await renderGrid(selected_day, currentUser);
 }
 
 initializeCalendar();
 
 window.changeMonth = changeMonth;
-window.changeDay = changeDay;
+window.changeYear = changeYear;
