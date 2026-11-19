@@ -66,7 +66,7 @@ html, body {
     --border-color: #e5e5ea;
     --radius-md: 18px;
     --radius-sm: 12px;
-    --streak: #F1EA51;
+    --streak: #F1EA51, #EEE250, #EBDB4F, #E8D34E, #E5CB4D, #E1C44C, #DEBC4B, #DBB44A, #D8AD49, #D5A548, #D29D47, #CF9646, #CC8E45, #C98644, #C67F43, #C27743, #BF7042, #BC6841, #B96040, #B6593F, #B3513E, #B0493D, #AD423C, #AA3A3B, #A7323A, #A32B39, #A02338, #9D1B37, #9A1436, #970C35, #940934;
 }
 * {
     box-sizing: border-box;
@@ -149,7 +149,7 @@ body {
 }
 .cell {
     aspect-ratio: auto;
-    /*background: transparent;*/
+    background: transparent;
     border: none;
     color: var(--text-primary);
     font-size: 14px;
@@ -175,9 +175,6 @@ body {
     background-color: var(--text-primary);
     color: #ffffff;
     font-weight: 600;
-}
-.streak {
-    background-color: var(--streak);
 }
 .event-area {
     display: flex;

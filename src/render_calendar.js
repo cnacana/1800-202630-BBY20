@@ -7,11 +7,8 @@ import {
   setDoc,
 } from "firebase/firestore";
 
-let streak_gradient = [
-    "F1EA51",
-    "EEE250",
-    "EBDB4F"
-]
+let streak_gradient2 = ["F1EA51", "EEE250", "EBDB4F", "E8D34E", "E5CB4D", "E1C44C", "DEBC4B", "DBB44A", "D8AD49", "D5A548", "D29D47", "CF9646", "CC8E45", "C98644", "C67F43", "C27743", "BF7042", "BC6841", "B96040", "B6593F", "B3513E", "B0493D", "AD423C", "AA3A3B", "A7323A", "A32B39", "A02338", "9D1B37", "9A1436", "970C35", "940934"]
+let streak_gradient = ["#f1ea51", "#f1da51", "#f1c251", "#f19251", "#f15156"]
 
 let date_info = new Date()
 const current_day_of_week = date_info.getDay()
@@ -150,9 +147,7 @@ async function renderGrid(selected_highlighted_day, user) {
 
             cell.classList.add('cell-has-data');
 
-            cell.classList.add('streak')
-
-            document.documentElement.style.setProperty("--streak", streak_gradient[streak])
+            cell.style.color = streak_gradient[streak]
         } else {
             streak = 0
         }
