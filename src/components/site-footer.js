@@ -1,7 +1,7 @@
 class SiteFooter extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
-            <footer class="py-3 my-4 border-top text-center">
+            <footer class="py-3 border-top text-center bg-secondary text-light">
                 <p class="mb-0 text-muted">&copy; 2026 BCIT COMP1800 BBY20 Project</p>
             </footer>
         `;

@@ -6,10 +6,10 @@ class SiteNavbar extends HTMLElement {
 
     renderNavbar() {
         this.innerHTML = `
-            <nav class="navbar navbar-expand-lg navbar-light bg-info">
+            <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="/">
-                        <img src="/images/elmo.jpg" height="36">
+                        <img src="/images/newicon.png" height="36">
                         Calandardemo
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

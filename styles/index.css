@@ -1,5 +1,34 @@
 * {
     margin: 0;
     padding: 0;
-    background-color: rgb(194, 194, 184);
 }
+
+html,
+body {
+    min-height: 100%;
+    background-color: beige;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    background-color: beige;
+}
+
+site-footer {
+    margin-top: auto;
+}
+
+.btn-orange {
+    background-color: #805f1a !important;
+    color: white !important;
+}
+
+/* .btn-orange:hover {
+    background-color: #5a5570;
+    color: white;
+} */
