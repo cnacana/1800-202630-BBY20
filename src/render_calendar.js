@@ -7,6 +7,12 @@ import {
   setDoc,
 } from "firebase/firestore";
 
+let streak_gradient = [
+    "F1EA51",
+    "EEE250",
+    "EBDB4F"
+]
+
 let date_info = new Date()
 const current_day_of_week = date_info.getDay()
 const current_date = date_info.getDate()
@@ -16,7 +22,7 @@ const current_year = date_info.getFullYear()
 let currentUser = null;
 
 let selected_day_of_week = current_day_of_week
-let selected_day = current_date
+let selected_day = undefined
 let selected_month = current_month
 let selected_year = current_year
 
@@ -112,6 +118,8 @@ async function renderGrid(selected_highlighted_day, user) {
 
     grid.replaceChildren();
 
+    let streak = 0
+
     for (let i = 0; i < total_calendar_cells; i++) {
         const cell = document.createElement('div')
         let first_day_of_year = new Date(selected_year, 0, 1)
@@ -138,7 +146,15 @@ async function renderGrid(selected_highlighted_day, user) {
         const day = i + 1;
 
         if (datesWithData.has(day)) {
+            streak += 1
+
             cell.classList.add('cell-has-data');
+
+            cell.classList.add('streak')
+
+            document.documentElement.style.setProperty("--streak", streak_gradient[streak])
+        } else {
+            streak = 0
         }
 
         if (selected_month === current_month && selected_year === current_year && (i + 1 - empty_days_in_month) === current_date) {

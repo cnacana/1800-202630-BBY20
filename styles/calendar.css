@@ -66,6 +66,7 @@ html, body {
     --border-color: #e5e5ea;
     --radius-md: 18px;
     --radius-sm: 12px;
+    --streak: #F1EA51;
 }
 * {
     box-sizing: border-box;
@@ -148,9 +149,8 @@ body {
 }
 .cell {
     aspect-ratio: auto;
-    background: transparent;
+    /*background: transparent;*/
     border: none;
-    border-radius: 50%;
     color: var(--text-primary);
     font-size: 14px;
     font-weight: 400;
@@ -175,6 +175,9 @@ body {
     background-color: var(--text-primary);
     color: #ffffff;
     font-weight: 600;
+}
+.streak {
+    background-color: var(--streak);
 }
 .event-area {
     display: flex;
