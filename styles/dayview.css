@@ -146,26 +146,58 @@ body {
 .event-input::placeholder {
   color: var(--text-secondary);
 }
-.add-button {
+.event-form {
+  position: relative;
+  overflow: hidden;
+  background-color: #fafafc;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.event-form:focus-within {
+  border-color: var(--accent-color);
+  background-color: #ffffff;
+}
+
+.event-input {
+  width: calc(100% - 36px);
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-size: 15px;
+}
+
+.event-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.save-button {
   position: absolute;
-  bottom: -14px;
-  right: -14px;
-  width: 46px;
-  height: 46px;
+  bottom: -46px;
+  right: -46px;
+  width: 92px;
+  height: 92px;
   background-color: var(--text-primary);
   color: #ffffff;
   border: none;
   border-radius: 50%;
   font-size: 26px;
   font-weight: 300;
+  line-height: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-top: 22px;
+  padding-left: 24px;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-  transition: background 0.15s ease, transform 0.15s ease;
+  transition: background-color 0.15s ease, transform 0.15s ease;
 }
-.add-button:hover {
+
+.save-button:hover {
   background-color: var(--accent-color);
   transform: scale(1.04);
 }
