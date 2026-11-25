@@ -124,35 +124,14 @@ body {
   gap: 12px;
 }
 .event-form {
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   background-color: #fafafc;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
-  padding: 14px 16px;
-  transition: border-color 0.15s ease, background-color 0.15s ease;
-}
-.event-form:focus-within {
-  border-color: var(--accent-color);
-  background-color: #ffffff;
-}
-.event-input {
-  width: calc(100% - 32px);
-  background: transparent;
-  border: none;
-  outline: none;
-  color: var(--text-primary);
-  font-size: 15px;
-}
-.event-input::placeholder {
-  color: var(--text-secondary);
-}
-.event-form {
-  position: relative;
-  overflow: hidden;
-  background-color: #fafafc;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-  padding: 14px 16px;
+  padding: 10px 12px 10px 16px;
   transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
@@ -162,7 +141,8 @@ body {
 }
 
 .event-input {
-  width: calc(100% - 36px);
+  flex: 1;
+  min-width: 0;
   background: transparent;
   border: none;
   outline: none;
@@ -174,32 +154,25 @@ body {
   color: var(--text-secondary);
 }
 
-.save-button {
-  position: absolute;
-  bottom: -46px;
-  right: -46px;
-  width: 92px;
-  height: 92px;
+.save-button,
+.add-button {
+  flex-shrink: 0;
   background-color: var(--text-primary);
   color: #ffffff;
   border: none;
-  border-radius: 50%;
-  font-size: 26px;
-  font-weight: 300;
-  line-height: 1;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding-top: 22px;
-  padding-left: 24px;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   transition: background-color 0.15s ease, transform 0.15s ease;
 }
 
-.save-button:hover {
+.save-button:hover,
+.add-button:hover {
   background-color: var(--accent-color);
-  transform: scale(1.04);
 }
 .event-list {
   display: flex;
