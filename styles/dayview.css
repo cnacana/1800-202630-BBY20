@@ -124,25 +124,32 @@ body {
   gap: 12px;
 }
 .event-form {
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   background-color: #fafafc;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
-  padding: 14px 16px;
+  padding: 10px 12px 10px 16px;
   transition: border-color 0.15s ease, background-color 0.15s ease;
 }
+
 .event-form:focus-within {
   border-color: var(--accent-color);
   background-color: #ffffff;
 }
+
 .event-input {
-  width: calc(100% - 32px);
+  flex: 1;
+  min-width: 0;
   background: transparent;
   border: none;
   outline: none;
   color: var(--text-primary);
   font-size: 15px;
 }
+
 .event-input::placeholder {
   color: var(--text-secondary);
 }
@@ -167,7 +174,6 @@ body {
 }
 .add-button:hover {
   background-color: var(--accent-color);
-  transform: scale(1.04);
 }
 .event-list {
   display: flex;
