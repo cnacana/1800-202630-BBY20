@@ -7,6 +7,9 @@ import {
   setDoc,
 } from "firebase/firestore";
 
+let streak_gradient2 = ["F1EA51", "EEE250", "EBDB4F", "E8D34E", "E5CB4D", "E1C44C", "DEBC4B", "DBB44A", "D8AD49", "D5A548", "D29D47", "CF9646", "CC8E45", "C98644", "C67F43", "C27743", "BF7042", "BC6841", "B96040", "B6593F", "B3513E", "B0493D", "AD423C", "AA3A3B", "A7323A", "A32B39", "A02338", "9D1B37", "9A1436", "970C35", "940934"]
+let streak_gradient = ["#f1ea51", "#f1da51", "#f1c251", "#f19251", "#f15156"]
+
 let date_info = new Date()
 const current_day_of_week = date_info.getDay()
 const current_date = date_info.getDate()
@@ -16,7 +19,7 @@ const current_year = date_info.getFullYear()
 let currentUser = null;
 
 let selected_day_of_week = current_day_of_week
-let selected_day = current_date
+let selected_day = undefined
 let selected_month = current_month
 let selected_year = current_year
 
@@ -112,6 +115,8 @@ async function renderGrid(selected_highlighted_day, user) {
 
     grid.replaceChildren();
 
+    let streak = 0
+
     for (let i = 0; i < total_calendar_cells; i++) {
         const cell = document.createElement('div')
         let first_day_of_year = new Date(selected_year, 0, 1)
@@ -138,7 +143,13 @@ async function renderGrid(selected_highlighted_day, user) {
         const day = i + 1;
 
         if (datesWithData.has(day)) {
+            streak += 1
+
             cell.classList.add('cell-has-data');
+
+            cell.style.color = streak_gradient[streak]
+        } else {
+            streak = 0
         }
 
         if (selected_month === current_month && selected_year === current_year && (i + 1 - empty_days_in_month) === current_date) {
