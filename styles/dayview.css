@@ -153,24 +153,25 @@ body {
 .event-input::placeholder {
   color: var(--text-secondary);
 }
-
-.save-button,
 .add-button {
-  flex-shrink: 0;
+  position: absolute;
+  bottom: -14px;
+  right: -14px;
+  width: 46px;
+  height: 46px;
   background-color: var(--text-primary);
   color: #ffffff;
   border: none;
-  border-radius: 8px;
-  padding: 6px 14px;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.2;
-  white-space: nowrap;
+  border-radius: 50%;
+  font-size: 26px;
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
-  transition: background-color 0.15s ease, transform 0.15s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: background 0.15s ease, transform 0.15s ease;
 }
-
-.save-button:hover,
 .add-button:hover {
   background-color: var(--accent-color);
 }
