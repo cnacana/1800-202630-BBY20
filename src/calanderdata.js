@@ -1,10 +1,4 @@
-import { auth, db } from "./firebaseConfig.js";
-import {
-  doc,
-  getDoc,
-  serverTimestamp,
-  setDoc,
-} from "firebase/firestore";
+import { auth } from "./firebaseConfig.js";
 
 import { onAuthStateChanged } from "firebase/auth";
 import {
@@ -14,6 +8,10 @@ import {
   readJournalImage,
   saveJournalImage,
 } from "./journalImages.js";
+import {
+  readJournalEntryForUser,
+  saveJournalEntryForUser,
+} from "./journalEntries.js";
 
 export function getUser() {
     return new Promise((resolve) => {
@@ -35,8 +33,7 @@ export async function readJournalEntry(day) {
     throw new Error("Please sign in before viewing journal entries.");
   }
 
-  const snapshot = await getDoc(getEntryDocument(user.uid, day));
-  return snapshot.exists() ? snapshot.data().text : "";
+  return readJournalEntryForUser(user.uid, day);
 }
 
 export async function saveJournalEntry(day, text) {
@@ -45,28 +42,18 @@ export async function saveJournalEntry(day, text) {
     throw new Error("Please sign in before saving a note.");
   }
 
-  const trimmedText = text.trim();
-  if (!trimmedText) {
-    throw new Error("Enter some text before saving.");
-  }
-
-  await setDoc(doc(db, "Userdata", "Journalentries"), {
-    type: "journalEntries",
-  }, { merge: true });
-
-  await setDoc(getEntryDocument(user.uid, day), {
-    userId: user.uid,
-    day,
-    text: trimmedText,
-    updatedAt: serverTimestamp(),
-  }, { merge: true });
+  return saveJournalEntryForUser(user.uid, day, text);
 }
 
 const journalEntry = document.getElementById("journal-entry");
 const saveButton = document.getElementById("save-journal-entry");
 const saveStatus = document.getElementById("journal-save-status");
 const imageInput = document.getElementById("journal-image-upload");
+const imageThumbnail = document.getElementById("journal-image-thumbnail");
 const imagePreview = document.getElementById("journal-image-preview");
+const imageLightbox = document.getElementById("journal-image-lightbox");
+const imageLightboxImage = document.getElementById("journal-image-lightbox-image");
+const imageLightboxClose = document.getElementById("journal-image-lightbox-close");
 let selectedDate = null;
 let readRequestId = 0;
 
@@ -78,12 +65,49 @@ function resizeJournalEntry() {
 function renderJournalImage(image) {
   if (image) {
     imagePreview.src = image;
-    imagePreview.hidden = false;
+    imageThumbnail.hidden = false;
   } else {
     imagePreview.removeAttribute("src");
-    imagePreview.hidden = true;
+    imageThumbnail.hidden = true;
+    closeImageLightbox(false);
   }
 }
+
+function closeImageLightbox(restoreFocus = true) {
+  if (imageLightbox.hidden) {
+    return;
+  }
+
+  imageLightbox.hidden = true;
+  imageLightboxImage.removeAttribute("src");
+  if (restoreFocus && !imageThumbnail.hidden) {
+    imageThumbnail.focus();
+  }
+}
+
+imageThumbnail.addEventListener("click", () => {
+  if (imageThumbnail.hidden || !imagePreview.src) {
+    return;
+  }
+
+  imageLightboxImage.src = imagePreview.src;
+  imageLightbox.hidden = false;
+  imageLightboxClose.focus();
+});
+
+imageLightbox.addEventListener("click", event => {
+  if (event.target === imageLightbox) {
+    closeImageLightbox();
+  }
+});
+
+imageLightboxClose.addEventListener("click", () => closeImageLightbox());
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    closeImageLightbox();
+  }
+});
 
 journalEntry.addEventListener("input", resizeJournalEntry);
 window.addEventListener("resize", resizeJournalEntry);

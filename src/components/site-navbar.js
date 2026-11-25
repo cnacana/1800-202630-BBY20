@@ -1,3 +1,5 @@
+import newIconUrl from "../../images/newicon.png";
+
 class SiteNavbar extends HTMLElement {
     constructor() {
         super();
@@ -9,7 +11,7 @@ class SiteNavbar extends HTMLElement {
             <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="/">
-                        <img src="/images/newicon.png" height="36">
+                        <img src="${newIconUrl}" height="36" alt="Calandardemo">
                         Calandardemo
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

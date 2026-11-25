@@ -23,6 +23,7 @@
         <label class="section-label" for="journalTextarea">Today's journal</label>
         <div class="journal-actions">
           <span class="journal-image-help" id="journalImageHelp">1 picture per day, max 2 MB, compressed for Firestore</span>
+          <button class="journal-save-button" id="journalSaveButton" type="button" disabled>Save entry</button>
           <input
             class="visually-hidden journal-image-input"
             id="journalImageInput"
@@ -32,7 +33,7 @@
             disabled
           >
           <label class="journal-image-button" for="journalImageInput">Add or replace picture</label>
-          <span class="save-status" id="journalStatus" role="status" aria-live="polite">Saved</span>
+          <span class="save-status" id="journalStatus" role="status" aria-live="polite">Loading today's entry...</span>
         </div>
       </div>
       <img class="journal-image-preview" id="journalImagePreview" alt="Today's journal picture" hidden>
@@ -69,6 +70,10 @@
     import { onAuthStateChanged } from 'firebase/auth';
     import { auth } from './src/firebaseConfig.js';
     import {
+      readJournalEntryForUser,
+      saveJournalEntryForUser,
+    } from './src/journalEntries.js';
+    import {
       MAX_JOURNAL_IMAGE_FILE_SIZE,
       compressJournalImage,
       readJournalImage,
@@ -80,10 +85,8 @@
       const today = new Date();
       const dayKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 
-      const JOURNAL_STORAGE_KEY = 'dayview-journal-entries';
       const TODO_STORAGE_KEY = 'dayview-todo-items';
 
-      const journalEntries = JSON.parse(localStorage.getItem(JOURNAL_STORAGE_KEY) || '{}');
       const todoItems = JSON.parse(localStorage.getItem(TODO_STORAGE_KEY) || '{}');
       function updateClock() {
         const now = new Date();
@@ -101,8 +104,7 @@
       }
 
       const textarea = $('journalTextarea');
-      textarea.value = journalEntries[dayKey] || '';
-
+      const saveButton = $('journalSaveButton');
       const imageInput = $('journalImageInput');
       const imagePreview = $('journalImagePreview');
       let currentUser = null;
@@ -119,33 +121,62 @@
         });
       }
 
-      async function loadJournalImage() {
+      async function loadTodayJournal() {
+        textarea.disabled = true;
+        saveButton.disabled = true;
         imageInput.disabled = true;
         try {
           currentUser = await getCurrentUser();
           if (!currentUser) {
-            $('journalStatus').textContent = 'Sign in to save pictures to Firestore.';
+            $('journalStatus').textContent = 'Sign in to load and save today\'s journal in Firestore.';
             return;
           }
 
-          const image = await readJournalImage(currentUser.uid, dayKey);
+          const [text, image] = await Promise.all([
+            readJournalEntryForUser(currentUser.uid, dayKey),
+            readJournalImage(currentUser.uid, dayKey),
+          ]);
+          textarea.value = text;
           if (image) {
             imagePreview.src = image;
             imagePreview.hidden = false;
-            $('journalStatus').textContent = 'Picture loaded from Firestore.';
           } else {
             imagePreview.removeAttribute('src');
             imagePreview.hidden = true;
           }
+          $('journalStatus').textContent = `Today's entry (${dayKey}) loaded from Firestore.`;
         } catch (error) {
-          console.error('Could not load journal picture:', error);
+          console.error('Could not load today\'s journal entry:', error);
           $('journalStatus').textContent = error instanceof Error
-            ? `Could not load picture: ${error.message}`
-            : 'Could not load picture. Please try again.';
+            ? `Could not load today's entry: ${error.message}`
+            : 'Could not load today\'s entry. Please try again.';
         } finally {
+          textarea.disabled = !currentUser;
+          saveButton.disabled = !currentUser;
           imageInput.disabled = !currentUser;
         }
       }
+
+      saveButton.addEventListener('click', async () => {
+        if (!currentUser) {
+          $('journalStatus').textContent = 'Sign in to save today\'s journal to Firestore.';
+          return;
+        }
+
+        saveButton.disabled = true;
+        $('journalStatus').textContent = 'Saving today\'s entry...';
+        try {
+          await saveJournalEntryForUser(currentUser.uid, dayKey, textarea.value);
+          $('journalStatus').textContent = `Saved today's entry (${dayKey}) to Firestore.`;
+        } catch (error) {
+          console.error('Could not save today\'s journal entry:', error);
+          $('journalStatus').textContent = error instanceof Error
+            ? `Could not save entry: ${error.message}`
+            : 'Could not save entry. Please try again.';
+        } finally {
+          saveButton.disabled = !currentUser;
+        }
+      });
 
       imageInput.addEventListener('change', async () => {
         const file = imageInput.files[0];
@@ -186,14 +217,12 @@
             : 'Could not save picture. Please try again.';
         } finally {
           imageInput.value = '';
-          imageInput.disabled = false;
+          imageInput.disabled = !currentUser;
         }
       });
 
       textarea.addEventListener('input', () => {
-        journalEntries[dayKey] = textarea.value;
-        localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(journalEntries));
-        $('journalStatus').textContent = 'Saved';
+        $('journalStatus').textContent = 'Unsaved changes.';
       });
       function saveTodos() {
         localStorage.setItem(TODO_STORAGE_KEY, JSON.stringify(todoItems));
@@ -257,7 +286,7 @@
       updateClock();
       setInterval(updateClock, 1000);
       renderTodos();
-      loadJournalImage();
+      loadTodayJournal();
     })();
   </script>
 </body>

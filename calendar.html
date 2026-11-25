@@ -49,18 +49,23 @@
                             <input class="visually-hidden event-image-input" id="journal-image-upload" type="file" accept="image/*" aria-describedby="journal-image-help" disabled>
                             <label class="event-image-button" for="journal-image-upload">Add or replace picture</label>
                             <span class="event-image-help" id="journal-image-help">1 picture per day, max 2 MB</span>
+                            <button class="event-image-thumbnail" id="journal-image-thumbnail" type="button" aria-label="Open picture for selected day" hidden>
+                                <img id="journal-image-preview" alt="">
+                            </button>
                         </div>
                         <button class="save-button" id="save-journal-entry" type="button">Save</button>
                     </div>
                     <p id="journal-save-status" class="mt-2 mb-0" role="status" aria-live="polite"></p>
                 </div>
-                <img class="event-image-preview" id="journal-image-preview" alt="Picture for selected journal day" hidden>
                 <div class="event-list" id="eventList" aria-live="polite"></div>
             </section>
         </section>
     </main>
+    <div class="image-lightbox" id="journal-image-lightbox" role="dialog" aria-modal="true" aria-label="Journal picture" hidden>
+        <button class="image-lightbox-close" id="journal-image-lightbox-close" type="button" aria-label="Close picture">×</button>
+        <img class="image-lightbox-image" id="journal-image-lightbox-image" alt="Picture for selected journal day">
+    </div>
 <script type="module" src="src/render_calendar.js"></script>
-<script type="module" src="/src/calanderdata.js"></script>
 </body>
 <script type="module" src="/src/components/site-footer.js"></script>
 </html>

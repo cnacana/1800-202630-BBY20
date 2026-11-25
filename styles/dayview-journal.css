@@ -175,6 +175,27 @@ body {
   border-color: #c4cbd2;
 }
 
+.journal-save-button {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--text-primary);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.journal-save-button:hover:not(:disabled) {
+  background-color: var(--accent-color);
+}
+
+.journal-save-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 .journal-image-input:focus-visible + .journal-image-button {
   outline: 2px solid var(--accent-color);
   outline-offset: 2px;

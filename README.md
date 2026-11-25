@@ -1,66 +1,69 @@
 # Backtrack
 
-
-## Overview
-Backtrack is a Calander app built around the theme of "Older and Wiser" for the Projects1800 class at BCIT
-
----
-
+Backtrack is a daily journal and calendar app. Journal entries and their optional compressed pictures are stored in Firestore per signed-in user and date.
 
 ## Features
 
-- Browse a list of curated hiking trails with images and details
-- Mark and unmark trails as favorites
-- View a personalized list of favorite hikes
-- Responsive design for desktop and mobile
+- Write and save a journal entry for today.
+- Browse dated entries and pictures in the calendar.
+- Keep a local to-do list on the daily journal page.
 
----
+## Run locally
 
-
-## Technologies Used
-
-- **Frontend**: HTML, CSS, JavaScript
-- **Build Tool**: [Vite](https://vitejs.dev/)
-- **Backend**: Firebase for hosting
-- **Database**: Firestore
-
----
-
-
-## Usage
-
-To run the application locally:
-
-1.  **Clone** the repository.
-2.  **Install dependencies** by running `npm install` in the project root directory.
-3.  **Start the development server** by running the command: `npm run dev`.
-4.  Open your browser and visit the local address shown in your terminal (usually `http://localhost:5173` or similar).
-
-Once the application is running:
-
-1.  Browse the list of hiking trails displayed on the main page.
-2.  Click the heart icon (or similar) to mark a trail as a favorite.
-3.  View your favorite hikes in the favorites section.
-
----
-
-
-## Project Structure
-
-```
-elmo-hikes/
-├── src/
-│   ├── main.js
-├── styles/
-│   └── style.css
-├── public/
-├── images/
-├── index.html
-├── package.json
-├── README.md
+```sh
+npm install
+npm run dev
 ```
 
----
+Vite prints the local development URL. Configure the `VITE_FIREBASE_*` environment variables before using Firebase-backed features.
+
+## Build and deploy
+
+Build the four active pages into `dist/`:
+
+```sh
+npm run build
+```
+
+Select your Firebase project in the Firebase CLI, then deploy the static site:
+
+```sh
+firebase deploy --only hosting
+```
+
+Firestore security rules are in `firestore.rules` and can be deployed separately:
+
+```sh
+firebase deploy --only firestore:rules
+```
+
+`firebase.json` configures Firebase Hosting to serve the Vite build from `dist/`.
+
+## Project structure
+
+```text
+calendar.html
+day_journal.html
+index.html
+login.html
+src/
+  components/
+  authentication.js
+  calanderdata.js
+  firebaseConfig.js
+  journalEntries.js
+  journalImages.js
+  loginSignup.js
+  main.js
+  render_calendar.js
+styles/
+images/
+  newicon.png
+unused/          archived pages and assets, excluded from the build
+vite.config.js
+firebase.json
+firestore.rules
+```
 
 
 ## Contributors
@@ -71,24 +74,20 @@ elmo-hikes/
 
 ## Acknowledgments
 
-- Trail data and images are for demonstration purposes only.
-- Code snippets were adapted from resources such as [Stack Overflow](https://stackoverflow.com/) and [MDN Web Docs](https://developer.mozilla.org/).
-- Icons sourced from [FontAwesome](https://fontawesome.com/) and images from [Unsplash](https://unsplash.com/).
+- Built with Firebase, Vite, Bootstrap, and standard browser APIs.
 
 ---
 
-
 ## Limitations and Future Work
+
 ### Limitations
 
-- Limited trail details (e.g., no live trail conditions).
-- Accessibility features can be further improved.
+- To-do items are stored locally in the current browser and are not synced across devices.
 
-### Future Work
+### Future work
 
-- Implement map view and trailhead directions.
-- Add filtering and sorting options (e.g., by difficulty, distance).
-- Create a dark mode for better usability in low-light conditions.
+- Sync to-do items to Firestore.
+- Add journal export and additional calendar views.
 
 ---
 

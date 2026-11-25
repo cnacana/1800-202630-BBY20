@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>login</title>
+    <meta name="loginpage" content="portingfirebase">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script type="module" crossorigin src="/assets/login-D9dnNMLo.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="modulepreload" crossorigin href="/assets/bootstrap.esm-DXxXZCc2.js">
+  <link rel="modulepreload" crossorigin href="/assets/site-footer-DOSPLEJJ.js">
+  <link rel="modulepreload" crossorigin href="/assets/firebaseConfig-CkS4MF7D.js">
+  <link rel="stylesheet" crossorigin href="/assets/bootstrap-CKvqFqyS.css">
+</head>
+
+<body>
+
+    <site-navbar></site-navbar>
+
+    <div class="container-fluid bg-dark d-flex align-items-center justify-content-center flex-grow-1 text-light px-4" style="min-height: 80vh;">
+        <div class="w-100 py-5" style="max-width: 420px;">
+            <div id="authAlert" class="alert alert-danger d-none" role="alert"></div>
+
+            <!-- Login -->
+            <div id="loginView">
+                <h3 class="mb-3 text-center fw-bold">Login</h3>
+                <form id="loginForm" novalidate>
+                    <div class="mb-3">
+                        <input type="email" id="loginEmail" class="form-control" placeholder="Email" required />
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" id="loginPassword" class="form-control" placeholder="Password" required />
+                    </div>
+                    <button type="submit" class="btn btn-orange w-100">Login</button>
+                </form>
+                <small class="d-block mt-3 text-center text-light">
+                    Don’t have an account?
+                    <a href="#" id="toSignup" class="text-warning">Sign up</a>
+                </small>
+            </div>
+
+            <!-- Signup -->
+            <div id="signupView" class="d-none">
+                <h3 class="mb-3 text-center fw-bold">Sign Up</h3>
+                <form id="signupForm" novalidate>
+                    <div class="mb-3">
+                        <input type="text" id="signupName" class="form-control" placeholder="First and Last Name"
+                            aria-label="Full name" required />
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" id="signupEmail" class="form-control" placeholder="Email" required />
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" id="signupPassword" class="form-control" placeholder="Password" required />
+                    </div>
+                    <button type="submit" class="btn btn-orange w-100">Create Account</button>
+                </form>
+                <small class="d-block mt-3 text-center text-light">
+                    Already have an account?
+                    <a href="#" id="toLogin" class="text-warning">Login</a>
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <!-- our own footer goes here -->
+    <site-footer></site-footer>
+
+
+    <!-- Firebase and authentication related scripts -->
+    <!-- The order of loading matters -->
+
+</body>
+
+</html>
