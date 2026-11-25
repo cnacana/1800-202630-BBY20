@@ -29,7 +29,7 @@ function initAuthUI() {
     const toLoginBtn = document.getElementById('toLogin');
     const loginForm = document.getElementById('loginForm');
     const signupForm = document.getElementById('signupForm');
-    const redirectUrl = 'calendar.html'; // Redirect after successful login/signup
+    const redirectUrl = 'day_journal.html'; // Redirect after successful login/signup
 
     // --- Helper Functions ---
     // Toggle element visibility

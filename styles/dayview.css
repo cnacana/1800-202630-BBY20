@@ -1,6 +1,9 @@
 :root {
-  --bg-color: #f2f2f7;
+  --bg-color: var(--bs-secondary, #6c757d);
   --card-bg: #ffffff;
+  --selected-day-bg: #dbeafe;
+  --control-bg: #e9ecef;
+  --control-hover-bg: #dee2e6;
   --text-primary: #1c1c1e;
   --text-secondary: #8e8e93;
   --accent-color: #007aff;
@@ -23,7 +26,7 @@ body {
 .app-shell {
   width: 100vw;
   min-height: 100vh;
-  background-color: var(--card-bg);
+  background-color: var(--bg-color);
   border: none;
   border-radius: 0;
   box-shadow: none;
@@ -58,7 +61,7 @@ body {
 .month-card {
   flex: 1;
   height: 100%;
-  background-color: #fafafc;
+  background-color: #f1f3f5;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 20px;
@@ -90,7 +93,7 @@ body {
 }
 .date-cell {
   aspect-ratio: auto;
-  background: transparent;
+  background: var(--control-bg);
   border: none;
   border-radius: 50%;
   color: var(--text-primary);
@@ -103,10 +106,10 @@ body {
   transition: background 0.12s ease;
 }
 .date-cell:hover {
-  background-color: #eef0f4;
+  background-color: var(--control-hover-bg);
 }
 .date-cell.outside {
-  color: #c7c7cc;
+  color: #6c757d;
 }
 .date-cell.today {
   font-weight: 600;
@@ -114,8 +117,8 @@ body {
   background-color: rgba(0, 122, 255, 0.08);
 }
 .date-cell.selected {
-  background-color: var(--text-primary);
-  color: #ffffff;
+  background-color: var(--selected-day-bg);
+  color: var(--text-primary);
   font-weight: 600;
 }
 .event-area {
@@ -128,7 +131,7 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  background-color: #fafafc;
+  background-color: var(--control-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   padding: 10px 12px 10px 16px;
@@ -137,7 +140,7 @@ body {
 
 .event-form:focus-within {
   border-color: var(--accent-color);
-  background-color: #ffffff;
+  background-color: var(--control-hover-bg);
 }
 
 .event-input {
@@ -194,7 +197,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fafafc;
+  background-color: var(--control-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   padding: 10px 14px;
@@ -246,7 +249,7 @@ body {
   opacity: 0.7;
 }
 .nav-arrow, .side-arrow {
-  background: #fafafc;
+  background: var(--control-bg);
   border: 1px solid var(--border-color);
   border-radius: 50%;
   width: 36px;
@@ -258,7 +261,7 @@ body {
   transition: background 0.12s ease, border-color 0.12s ease;
 }
 .nav-arrow:hover, .side-arrow:hover {
-  background-color: #eef0f4;
+  background-color: var(--control-hover-bg);
   border-color: #d1d1d6;
 }
 .chevron {

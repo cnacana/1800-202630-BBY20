@@ -11,14 +11,12 @@ let streak_gradient2 = ["F1EA51", "EEE250", "EBDB4F", "E8D34E", "E5CB4D", "E1C44
 let streak_gradient = ["#f1ea51", "#f1da51", "#f1c251", "#f19251", "#f15156"]
 
 let date_info = new Date()
-const current_day_of_week = date_info.getDay()
 const current_date = date_info.getDate()
 const current_month = date_info.getMonth() + 1
 const current_year = date_info.getFullYear()
 
 let currentUser = null;
 
-let selected_day_of_week = current_day_of_week
 let selected_day = undefined
 let selected_month = current_month
 let selected_year = current_year
@@ -49,7 +47,7 @@ function onCellInteraction(event, id) {
         selected_cell.classList.remove("selected-cell");
         selected_cell.classList.add("selected-cell");
 
-        selected_day = Number(selected_cell.querySelector(".cell-date").innerHTML) + firstDayOfWeekOfMonth(selected_month)
+        selected_day = Number(selected_cell.querySelector(".cell-date").innerHTML)
 
         let selectedDate = `${selected_year}-${String(selected_month).padStart(2, '0')}-${String(selected_day).padStart(2, '0')}`
 
@@ -125,6 +123,7 @@ async function renderGrid(selected_highlighted_day, user) {
         cell.id = String(Math.round((current_day_of_year - first_day_of_year) / (1000 * 3600 * 24) + 1)) // First day of 0 is 1 and not 0
 
         if (i >= empty_days_in_month) {
+            cell.classList.add('calendar-day')
             const cell_date = document.createElement('p')
             cell_date.className = 'cell-date'
             cell_date.innerText = String(i + 1 - empty_days_in_month)
@@ -140,7 +139,7 @@ async function renderGrid(selected_highlighted_day, user) {
         // cell_has_data = snapshot.exists() ? snapshot.data().text : "";
         // console.log(cell_has_data)
 
-        const day = i + 1;
+        const day = i + 1 - empty_days_in_month;
 
         if (datesWithData.has(day)) {
             streak += 1
@@ -156,7 +155,7 @@ async function renderGrid(selected_highlighted_day, user) {
             cell.classList.add('cell-today')
         }
 
-        if (selected_day === (i + 1) && selected_highlighted_day !== undefined) {
+        if (selected_day === day && selected_highlighted_day !== undefined) {
             cell.classList.add('cell-selected')
         } // else if (cell_has_data.converter !== null) {
             // cell.classList.add('cell-has-data')
@@ -188,7 +187,7 @@ function changeMonth(increment) {
     if (selected_month === current_month) {
         selected_day = current_date
     } else {
-        selected_day = firstDayOfWeekOfMonth(selected_month) + 1
+        selected_day = 1
     }
 
     if (selected_month > 12) {

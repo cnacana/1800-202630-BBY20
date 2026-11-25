@@ -6,7 +6,7 @@
 html,
 body {
     min-height: 100%;
-    background-color: beige;
+    background-color: var(--bs-secondary, #6c757d);
 }
 
 body {
@@ -16,7 +16,7 @@ body {
 }
 
 body {
-    background-color: beige;
+    background-color: var(--bs-secondary, #6c757d);
 }
 
 site-footer {
