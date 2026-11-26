@@ -39,7 +39,28 @@ body {
   flex-direction: column;
   gap: 20px;
 }
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  background-color: transparent;
+  border-bottom: none;
+}
 
+.nav-btn {
+  color: #e6edf3;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.nav-btn:hover {
+  background-color: #3d444d;
+  color: #ffffff;
+}
 .side-nav-button {
   z-index: 10;
   top: 50%;
