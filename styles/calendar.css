@@ -21,55 +21,40 @@ html, body {
 #journal-save-status {
     color: var(--text-secondary)
 }
-
-/*
-.cell {
-    border: 1px solid blue;
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #6c757d;
+        --card-bg: #1f2123;
+        --selected-day-bg: #373A3C;
+        --today-bg: #454a4b;
+        --cell-bg: #232627;
+        --control-bg: #232627;
+        --control-hover-bg: #2d3031;
+        --text-primary: #e5e5ea;
+        --text-secondary: #8e8e93;
+        --accent-color: #ff8500;
+        --accent-hover: #ff9d33;
+        --border-color: #1f2123;
+        --radius-md: 18px;
+        --radius-sm: 12px;
+    }
 }
-
-.cell-has-data {
-    background-color: orangered;
-}
-
-.cell-today {
-    background-color: yellow;
-}
-
-.cell-selected {
-    background-color: lightblue;
-}
-
-.cell-selected.cell-today {
-    background-color: lightgreen;
-}
-
-.cell-has-data.cell-today {
-    background-color: orange;
-}
-
-.cell-selected.cell-has-data {
-    background-color: violet;
-}
-
-.cell-selected.cell-today.cell-has-data {
-    background-color: purple;
-}
-*/
-
-:root {
-    --bg-color: var(--bs-secondary, #6c757d);
-    --card-bg: #ffffff;
-    --selected-day-bg: #dbeafe;
-    --control-bg: #e9ecef;
-    --control-hover-bg: #dee2e6;
-    --text-primary: #1c1c1e;
-    --text-secondary: #8e8e93;
-    --accent-color: #007aff;
-    --accent-hover: #0062cc;
-    --border-color: #e5e5ea;
-    --radius-md: 18px;
-    --radius-sm: 12px;
-    --streak: #F1EA51, #EEE250, #EBDB4F, #E8D34E, #E5CB4D, #E1C44C, #DEBC4B, #DBB44A, #D8AD49, #D5A548, #D29D47, #CF9646, #CC8E45, #C98644, #C67F43, #C27743, #BF7042, #BC6841, #B96040, #B6593F, #B3513E, #B0493D, #AD423C, #AA3A3B, #A7323A, #A32B39, #A02338, #9D1B37, #9A1436, #970C35, #940934;
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg-color: var(--bs-secondary, #6c757d);
+        --card-bg: #ffffff;
+        --selected-day-bg: #cfd5db;
+        --today-bg: #dbeafe;
+        --control-bg: #e9ecef;
+        --control-hover-bg: #dee2e6;
+        --text-primary: #1c1c1e;
+        --text-secondary: #8e8e93;
+        --accent-color: #007aff;
+        --accent-hover: #0062cc;
+        --border-color: #e5e5ea;
+        --radius-md: 18px;
+        --radius-sm: 12px;
+    }
 }
 * {
     box-sizing: border-box;
@@ -158,7 +143,7 @@ body {
 .month-card {
     flex: 1;
     height: 100%;
-    background-color: #f1f3f5;
+    background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     padding: 20px;
@@ -192,7 +177,7 @@ body {
     aspect-ratio: auto;
     background: transparent;
     border: none;
-    color: var(--text-primary);
+    color: var(--cell-bg);
     font-size: 14px;
     font-weight: 400;
     cursor: pointer;
@@ -204,22 +189,22 @@ body {
 .cell:hover:not(.cell-selected) {
     background-color: var(--control-hover-bg);
 }
+.cell-selected, .cell.calendar-day.cell-selected {
+    background-color: var(--selected-day-bg);
+    color: var(--text-primary);
+    font-weight: 600;
+}
 .cell.calendar-day {
     background-color: var(--control-bg);
     border-radius: 8px;
 }
 .cell:not(.cell-has-data):not(.cell-today):not(.cell-selected) {
-    color: #6c757d;
+    color: var(--cell-non-selected);
 }
-.cell-today {
+.cell-today, .cell-today.calendar-day {
     font-weight: 600;
     color: var(--accent-color);
-    background-color: rgba(0, 122, 255, 0.08);
-}
-.cell-selected {
-    background-color: var(--selected-day-bg);
-    color: var(--text-primary);
-    font-weight: 600;
+    background-color: var(--today-bg);
 }
 .event-area {
     display: flex;
@@ -276,7 +261,7 @@ body {
     padding: 6px 10px;
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    background-color: #f1f3f5;
+    background-color: var(--card-bg);
     color: var(--text-primary);
     font-size: 0.85rem;
     cursor: pointer;
@@ -359,7 +344,7 @@ body {
     min-width: 76px;
     min-height: 36px;
     padding: 8px 16px;
-    background-color: var(--text-primary);
+    background-color: #1c1c1e;
     color: #ffffff;
     border: none;
     border-radius: 8px;
@@ -450,6 +435,7 @@ body {
 }
 .nav-arrow, .side-arrow {
     background: var(--control-bg);
+    color: var(--text-primary);
     border: 1px solid var(--border-color);
     border-radius: 50%;
     width: 36px;

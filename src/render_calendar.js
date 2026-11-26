@@ -7,8 +7,9 @@ import {
   setDoc,
 } from "firebase/firestore";
 
-let streak_gradient2 = ["F1EA51", "EEE250", "EBDB4F", "E8D34E", "E5CB4D", "E1C44C", "DEBC4B", "DBB44A", "D8AD49", "D5A548", "D29D47", "CF9646", "CC8E45", "C98644", "C67F43", "C27743", "BF7042", "BC6841", "B96040", "B6593F", "B3513E", "B0493D", "AD423C", "AA3A3B", "A7323A", "A32B39", "A02338", "9D1B37", "9A1436", "970C35", "940934"]
-let streak_gradient = ["#f1ea51", "#f1da51", "#f1c251", "#f19251", "#f15156"]
+let alternate_streak_gradient = ["#F1EA51", "#F1BD51", "#F1AC51", "#E97939", "#E45A2A", "#E1431F", "#DF3619", "#DD2913", "#DB1D0D", "#D91409", "#D70804", "#D60000", "#D20001", "#CE0002", "#CB0002", "#C80002", "#C50003", "#C10004", "#BE0004", "#BB0005", "#BA0005", "#B80005", "#B40006", "#B00006", "#AD0007", "#AD0017", "#AD0027", "#AD0037", "#AD0047", "#AD0057", "#A90079", "#8800A3"]
+let streak_gradient = ["#f1ea51", "#f1e44f", "#f2de4c", "#f2d84a", "#f2d247", "#f2cc45", "#f2c642", "#f2c040", "#f1ba3d", "#f1b43b", "#f1ae38", "#f0a836", "#efa133", "#ef9b31", "#ee952e", "#ed8f2c", "#ec8829", "#eb8227", "#ea7b24", "#e87522", "#e76e1f", "#e76e1f", "#e6671c", "#e4601a", "#e35817", "#e15114", "#df4811", "#de400e", "#dc360a", "#da2a06", "#d81c03", "#d60000"]
+
 
 let date_info = new Date()
 const current_date = date_info.getDate()
