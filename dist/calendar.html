@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+
   <script type="module" crossorigin src="/assets/calendar-BJV2Dv9V.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
   <link rel="modulepreload" crossorigin href="/assets/firebaseConfig-CkS4MF7D.js">
@@ -32,8 +33,9 @@
         </header>
         <section class="calendar-stage">
             <div class="month-row">
-                <button class="side-arrow prev" onclick="changeMonth(-1)">
-                    <i class="bi bi-chevron-left fs-5"></i>
+                <button class="side-arrow prev" onclick="changeMonth(-1)" aria-label="Previous month">
+                    <i class="bi bi-chevron-left fs-5" aria-hidden="true"></i>
+                    <span class="back-today-tooltip" aria-hidden="true">Previous month</span>
                 </button>
                 <div class="month-card">
                     <div class="month-title">
@@ -42,8 +44,9 @@
                     <div class="weekday-grid" aria-hidden="true"><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span></div>
                     <div id="calendar-grid" class="dates-grid"></div>
                 </div>
-                <button class="side-arrow" onclick="changeMonth(1)">
-                    <i class="bi bi-chevron-right fs-5"></i>
+                <button class="side-arrow" onclick="changeMonth(1)" aria-label="Next month">
+                    <i class="bi bi-chevron-right fs-5" aria-hidden="true"></i>
+                    <span class="back-today-tooltip" aria-hidden="true">Next month</span>
                 </button>
             </div>
             <section class="event-area">
@@ -69,7 +72,9 @@
     <div class="image-lightbox" id="journal-image-lightbox" role="dialog" aria-modal="true" aria-label="Journal picture" hidden>
         <button class="image-lightbox-close" id="journal-image-lightbox-close" type="button" aria-label="Close picture">×</button>
         <img class="image-lightbox-image" id="journal-image-lightbox-image" alt="Picture for selected journal day">
-    </div>
-</body>
+    </div>
+
+</body>
+
 </html>
 

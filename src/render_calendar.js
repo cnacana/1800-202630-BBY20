@@ -7,8 +7,8 @@ import {
   setDoc,
 } from "firebase/firestore";
 
-let alternate_streak_gradient = ["#F1EA51", "#F1BD51", "#F1AC51", "#E97939", "#E45A2A", "#E1431F", "#DF3619", "#DD2913", "#DB1D0D", "#D91409", "#D70804", "#D60000", "#D20001", "#CE0002", "#CB0002", "#C80002", "#C50003", "#C10004", "#BE0004", "#BB0005", "#BA0005", "#B80005", "#B40006", "#B00006", "#AD0007", "#AD0017", "#AD0027", "#AD0037", "#AD0047", "#AD0057", "#A90079", "#8800A3"]
-let streak_gradient = ["#f1ea51", "#f1e44f", "#f2de4c", "#f2d84a", "#f2d247", "#f2cc45", "#f2c642", "#f2c040", "#f1ba3d", "#f1b43b", "#f1ae38", "#f0a836", "#efa133", "#ef9b31", "#ee952e", "#ed8f2c", "#ec8829", "#eb8227", "#ea7b24", "#e87522", "#e76e1f", "#e76e1f", "#e6671c", "#e4601a", "#e35817", "#e15114", "#df4811", "#de400e", "#dc360a", "#da2a06", "#d81c03", "#d60000"]
+let light_mode_streak_gradient = ["#4993E2ff", "#4C8EE2ff", "#4F89E1ff", "#5284E1ff", "#547FE1ff", "#577AE0ff", "#5A75E0ff", "#5D70E0ff", "#606AE0ff", "#6365DFff", "#6660DFff", "#685BDFff", "#6B56DEff", "#6E51DEff", "#714CDEff", "#7447DDff", "#7742DDff", "#7A3DDDff", "#7D38DCff", "#7F33DCff", "#822EDCff", "#8529DBff", "#8823DBff", "#8B1EDBff", "#8E19DBff", "#9114DAff", "#930FDAff", "#960ADAff", "#9905D9ff", "#9C00D9ff", "#9E00C9ff", "#9F00B9ff"]
+let dark_mode_streak_gradient = ["#f1ea51", "#f1e44f", "#f2de4c", "#f2d84a", "#f2d247", "#f2cc45", "#f2c642", "#f2c040", "#f1ba3d", "#f1b43b", "#f1ae38", "#f0a836", "#efa133", "#ef9b31", "#ee952e", "#ed8f2c", "#ec8829", "#eb8227", "#ea7b24", "#e87522", "#e76e1f", "#e76e1f", "#e6671c", "#e4601a", "#e35817", "#e15114", "#df4811", "#de400e", "#dc360a", "#da2a06", "#d81c03", "#d60000"]
 
 
 let date_info = new Date()
@@ -131,15 +131,6 @@ async function renderGrid(selected_highlighted_day, user) {
             cell.appendChild(cell_date)
         }
 
-        // let selected_date = `${selected_year}-${String(selected_month).padStart(2, '0')}-${String(i + 1).padStart(2, '0')}`
-        // console.log(selected_date)
-        // let cell_has_data = getEntryDocument(user, selected_date)
-        // console.log(cell_has_data.text)
-        // console.log(getUser().uid)
-        // const snapshot = await getDoc(getEntryDocument(user, selected_date));
-        // cell_has_data = snapshot.exists() ? snapshot.data().text : "";
-        // console.log(cell_has_data)
-
         const day = i + 1 - empty_days_in_month;
 
         if (datesWithData.has(day)) {
@@ -147,7 +138,14 @@ async function renderGrid(selected_highlighted_day, user) {
 
             cell.classList.add('cell-has-data');
 
-            cell.style.color = streak_gradient[streak]
+            const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (isDarkMode) {
+                cell.style.color = dark_mode_streak_gradient[streak]
+            } else {
+                cell.style.color = light_mode_streak_gradient[streak]
+            }
+
         } else {
             streak = 0
         }

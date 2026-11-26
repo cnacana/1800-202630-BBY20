@@ -1,26 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    vertical-align: baseline;
-    background: transparent;
-}
-
-html, body {
-    height: 100%;
-}
-
-#calendar-grid {
-    display: grid;
-    width: 100%;
-    height: 100%;
-    grid-template-columns: repeat(7, 1fr);
-}
-
-#journal-save-status {
-    color: var(--text-secondary)
-}
 @media (prefers-color-scheme: dark) {
     :root {
         --bg-color: #6c757d;
@@ -57,15 +34,31 @@ html, body {
     }
 }
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;
+    box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+}
+html, body {
+    height: 100%;
 }
 body {
     background-color: var(--bg-color);
     color: var(--text-primary);
     min-height: 100vh;
+}
+#calendar-grid {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: repeat(7, 1fr);
+}
+#journal-save-status {
+    color: var(--text-secondary)
 }
 .app-shell {
     position: relative;
@@ -86,7 +79,7 @@ body {
     align-items: center;
     gap: 8px;
 }
-.year-bar .nav-arrow {
+.year-bar .nav-arrow, .side-arrow {
     position: relative;
 }
 .year-bar .back-today-tooltip {
@@ -117,7 +110,9 @@ body {
 .back-today:hover .back-today-tooltip,
 .back-today:focus-visible .back-today-tooltip,
 .year-bar .nav-arrow:hover .back-today-tooltip,
-.year-bar .nav-arrow:focus-visible .back-today-tooltip {
+.year-bar .nav-arrow:focus-visible .back-today-tooltip,
+.calendar-stage .month-row .side-arrow:hover .back-today-tooltip,
+.calendar-stage .month-row .side-arrow:focus-visible .back-today-tooltip {
     opacity: 1;
     visibility: visible;
 }

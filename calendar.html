@@ -27,8 +27,9 @@
         </header>
         <section class="calendar-stage">
             <div class="month-row">
-                <button class="side-arrow prev" onclick="changeMonth(-1)">
-                    <i class="bi bi-chevron-left fs-5"></i>
+                <button class="side-arrow prev" onclick="changeMonth(-1)" aria-label="Previous month">
+                    <i class="bi bi-chevron-left fs-5" aria-hidden="true"></i>
+                    <span class="back-today-tooltip" aria-hidden="true">Previous month</span>
                 </button>
                 <div class="month-card">
                     <div class="month-title">
@@ -37,8 +38,9 @@
                     <div class="weekday-grid" aria-hidden="true"><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span></div>
                     <div id="calendar-grid" class="dates-grid"></div>
                 </div>
-                <button class="side-arrow" onclick="changeMonth(1)">
-                    <i class="bi bi-chevron-right fs-5"></i>
+                <button class="side-arrow" onclick="changeMonth(1)" aria-label="Next month">
+                    <i class="bi bi-chevron-right fs-5" aria-hidden="true"></i>
+                    <span class="back-today-tooltip" aria-hidden="true">Next month</span>
                 </button>
             </div>
             <section class="event-area">
